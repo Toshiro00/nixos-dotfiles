@@ -1,8 +1,5 @@
-
-{ config, pkgs, ... }:
-
+{ pkgs, ... }:
 {
-  # Declarative ZFS Tuning
   systemd.services.zfs-tuning = {
     description = "Apply Blume-standard ZFS optimizations";
     after = [ "zfs-mount.service" ];

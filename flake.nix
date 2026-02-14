@@ -1,5 +1,5 @@
 {
-  description = "Blume Infrastructure - Central Routing";
+  description = "Blume Corporation NixOS Fleet";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -9,18 +9,17 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
-    nixosConfigurations.blume = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hosts/blume/configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.bagley = import ./users/bagley/home.nix;
-        }
-      ];
+  outputs = { nixpkgs, home-manager, ... }:
+  let
+    mkhost = import ./lib/mkhost.nix { inherit nixpkgs home-manager; };
+  in
+  {
+    nixosConfigurations = {
+      blume = mkhost {
+        system = "x86_64-linux";
+        hostName = "blume";
+        userName = "bagley";
+      };
     };
   };
 }

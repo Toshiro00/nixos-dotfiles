@@ -21,5 +21,22 @@ in
     };
 
     networking.firewall.trustedInterfaces = [ "ve-+" ];
+
+    # Inject global SSH keys into all containers
+    # Note: We list them explicitly to avoid infinite recursion with config.containers
+    containers = let
+      commonConfig = {
+        users.users.root.openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDHnFyYQoNk6W+xMHaxL9OOe7pSM6ttTL8xu4E+hK/g8 toshiro@nixos"
+        ];
+      };
+    in {
+      ctos.config = commonConfig;
+      homepage.config = commonConfig;
+      llama-dev.config = commonConfig;
+      llama.config = commonConfig;
+      uptime-kuma.config = commonConfig;
+      vaultwarden.config = commonConfig;
+    };
   };
 }

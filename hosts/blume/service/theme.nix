@@ -1,11 +1,11 @@
 { ... }:
 {
   blume.theme = {
-    enable = true;
+    enable = false;
     brand = "Blume Corporation";
     palette = "cyan-dark";
-    loginSurfaces.sshBanner.enable = true;
-    loginSurfaces.shellMotd.enable = true;
+    loginSurfaces.sshBanner.enable = false;
+    loginSurfaces.shellMotd.enable = false;
     motd.mode = "system-status";
   };
 }

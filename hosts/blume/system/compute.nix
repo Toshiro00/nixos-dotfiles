@@ -7,5 +7,6 @@
   environment.systemPackages = with pkgs; [
     rocmPackages.rocminfo
     rocmPackages.rocm-smi
+    radeontop
   ];
 }

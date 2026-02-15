@@ -1,10 +1,17 @@
 { pkgs, ... }:
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   programs.fish.enable = true;
-  services.openssh.enable = true;
   programs.nix-ld.enable = true;
+  services.openssh.enable = true;
+
+  
 
   environment.systemPackages = with pkgs; [
     git
@@ -15,6 +22,6 @@
     curl
     tree
     nil
-    nixfmt-rfc-style
+    nixfmt
   ];
 }

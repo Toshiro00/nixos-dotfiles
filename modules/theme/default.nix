@@ -3,6 +3,7 @@ let
   cfg = config.blume.theme;
 in
 {
+
   options.blume.theme = {
     enable = lib.mkEnableOption "Blume Corporation theme";
 
@@ -13,7 +14,11 @@ in
     };
 
     palette = lib.mkOption {
-      type = lib.types.enum [ "amber-black" "cyan-dark" "mono-accent" ];
+      type = lib.types.enum [
+        "amber-black"
+        "cyan-dark"
+        "mono-accent"
+      ];
       default = "amber-black";
       description = "Theme palette identifier.";
     };
@@ -33,7 +38,11 @@ in
     };
 
     motd.mode = lib.mkOption {
-      type = lib.types.enum [ "system-status" "lore" "security" ];
+      type = lib.types.enum [
+        "system-status"
+        "lore"
+        "security"
+      ];
       default = "system-status";
       description = "MOTD content mode.";
     };
@@ -56,15 +65,15 @@ in
         environment.variables.BLUME_THEME_MOTD_MODE = cfg.motd.mode;
 
         environment.etc."blume/motd_ascii".text = ''
-          
-             _____  _      _    _  __  __ ______ 
-            |  __ \| |    | |  | ||  \/  |  ____|
-            | |__) | |    | |  | || \  / | |__   
-            |  __ <| |    | |  | || |\/| |  __|  
-            | |__) | |____| |__| || |  | | |____ 
-            |_____/|______|\____/ |_|  |_|______|
-                                                 
-             C E N T R A L  O P E R A T I N G  S Y S T E M
+
+           _____  _      _    _  __  __ ______ 
+          |  __ \| |    | |  | ||  \/  |  ____|
+          | |__) | |    | |  | || \  / | |__   
+          |  __ <| |    | |  | || |\/| |  __|  
+          | |__) | |____| |__| || |  | | |____ 
+          |_____/|______|\____/ |_|  |_|______|
+                                               
+           C E N T R A L  O P E R A T I N G  S Y S T E M
         '';
       })
     ]

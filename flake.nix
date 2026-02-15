@@ -7,19 +7,28 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-
-  outputs = { nixpkgs, home-manager, ... }:
-  let
-    mkhost = import ./lib/mkhost.nix { inherit nixpkgs home-manager; };
-  in
-  {
-    nixosConfigurations = {
-      blume = mkhost {
-        system = "x86_64-linux";
-        hostName = "blume";
-        userName = "bagley";
-      };
+    vscodium-server = {
+      url = "github:unicap/nixos-vscodium-server";
     };
   };
+
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      vscodium-server,
+      ...
+    }@inputs:
+    let
+      mkhost = import ./lib/mkhost.nix { inherit nixpkgs home-manager inputs; };
+    in
+    {
+      nixosConfigurations = {
+        blume = mkhost {
+          system = "x86_64-linux";
+          hostName = "blume";
+          userName = "bagley";
+        };
+      };
+    };
 }
